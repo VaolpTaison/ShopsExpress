@@ -1,0 +1,39 @@
+﻿@model ShopsExpress.Models.Product
+@{
+    ViewBag.Title = Model.productName;
+}
+<h2> @Model.productName</h2>
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm">
+            <img class="img-thumbnail" src="@Model.productImg" alt="" />
+            <h2>@Model.productName</h2>
+            <p>@Model.productDesc</p>
+            <p>Количество на складе: @Model.productQua</p>
+            @using (Html.BeginForm())
+            {
+        <form asp-action="booking" asp-controller="home">
+            <input type="hidden" name="idProd" value="@Model.productId">
+            <input type="number" name="kolpr" value="@Model.productQua" min="0" max="@Model.productQua" step="1" width-setter="10" required />
+            <br />
+            <input class="form-control" type="text" name="nameUs" maxlength="50" required />
+            <br />
+            <input class="form-control" type="email" name="emailUs" maxlength="50" required />
+            <br />
+            <input type="submit" value="Отправить" class="btn btn-default" />
+            <br />
+        </form>
+            }
+            <!--<asp:Panel>
+                <div id="NoRecords" runat="server" visible="false" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            Выберите корректное количество товаров
+                        </div>
+                    </div>
+                </div>
+            </asp:Panel>-->
+        </div>
+    </div>
+</div>

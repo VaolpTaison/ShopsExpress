@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+        <div class="col-sm">
+            <img class="img-thumbnail" src="@item.productImg" alt="" />
+            <h2>@item.productName</h2>
+            <p>@item.productDesc</p>
+            <p>Количество на складе: @item.productQua</p>
+            @if (item.productQua > 0)
+            {
+                <a asp-action="Booking" asp-controller="Home" asp-route-id="@item.productId" class="btn btn-primary">Забронировать</a>
+            }
+            @if(item.productQua == 0)  {
+                <a href="#" class="btn btn-secondary disabled" role="button" aria-disabled="true">Забронировать</a>
+            }
+
+        </div>
+        }
+    </div>
+</div>
