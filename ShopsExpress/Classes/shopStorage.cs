@@ -26,7 +26,7 @@ namespace ShopsExpress.Controllers
             var desc = db.Products.Where(p => p.productId == idProd).Select(p => new { p.productQua }).ToList();
             foreach (var q in desc)
                 qua = Convert.ToInt32(q.productQua);
-            if (qua > 0 && qua > vQu)
+            if (qua > 0 && qua >= vQu)
             {
                 int ostProd = Convert.ToInt32(qua) - vQu;
                 var data = db.Products.SingleOrDefault(row => row.productId == idProd);
