@@ -10,7 +10,7 @@ namespace ShopsExpress.Models
     {
         public DbSet<Product> Products { get; set; } // Таблица с товарами
 
-        public DbSet<Booking> Bookings { get; set; } // Таблица с бронированием товара
+        public DbSet<Booking> Bookings { get; set; } // Таблица с бронированием товаров
 
         /*protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {

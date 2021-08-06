@@ -41,7 +41,6 @@ namespace ShopsExpress.Controllers
             return NotFound();
         }
 
-        //public shopStorage ss;
         // ф-ия обработчик HttpHost (заполнение таблицы Bookings)
         [HttpPost]
         public ActionResult Booking(int kolpr, int idProd, string nameUs, string emailUs)
@@ -58,21 +57,6 @@ namespace ShopsExpress.Controllers
             else
                 ViewBag.result = 0;
                 return RedirectToAction("Booking");
-            //EditProduct(kolpr, idProd);
-            
         }
-
-        // процедура изменения данных об остатке товара в таблице Products
-        /*private void EditProduct (int bQu, int idProd)
-        {
-            int qua = 0;
-            var desc = db.Products.Where(p => p.productId == idProd).Select(p => new { p.productQua}).ToList(); // запрос в таблицу с товарами
-            foreach (var q in desc)
-                qua = Convert.ToInt32(q.productQua);
-            int ostProd = Convert.ToInt32(qua) - bQu;
-            var data = db.Products.SingleOrDefault(row => row.productId == idProd);
-            data.productQua = ostProd;
-            db.SaveChanges();
-        }*/
     }
 }
