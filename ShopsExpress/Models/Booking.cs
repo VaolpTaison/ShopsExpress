@@ -8,7 +8,7 @@ namespace ShopsExpress.Models
     public class Booking
     {
         public int bookingId { get; set; }
-        public int bookingDesc { get; set; }
+        public int bookingQua { get; set; }
         public int productId { get; set; }
         public string nameUser { get; set; }
         public string emailUser { get; set; }

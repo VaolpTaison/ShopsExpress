@@ -46,17 +46,19 @@ namespace ShopsExpress.Controllers
         public ActionResult Booking(int kolpr, int idProd, string nameUs, string emailUs)
         {
             var ss = new shopStorage(db);
-            Booking booking = new Booking {bookingDesc = kolpr, productId = idProd, nameUser = nameUs, emailUser = emailUs };
-            int i = ss.Reserve(idProd, kolpr);
+            //Booking booking = new Booking { bookingDesc = kolpr, productId = idProd, nameUser = nameUs, emailUser = emailUs };
+            int i = ss.Reserve(idProd, kolpr); // idProd = id товара, kolpr - количество бронируемого товара
             if (i == 1)
             {
-                db.Bookings.Add(booking);
+                Booking booking = db.Bookings.First(p => p.emailUser == null); // проверка строки, у которой отсутствует запись email (Как правило она одна в бд)
+                booking.nameUser = nameUs;
+                booking.emailUser = emailUs;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             else
                 ViewBag.result = 0;
-                return RedirectToAction("Booking");
+            return RedirectToAction("Booking");
         }
     }
 }

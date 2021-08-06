@@ -21,6 +21,27 @@ namespace ShopsExpress.Controllers
 
         public int Reserve(int idProd, int vQu)
         {
+            int qua = 0;
+            var desc = db.Products.Where(p => p.productId == idProd).Select(p => new { p.productQua }).ToList();
+            foreach (var q in desc)
+                qua = Convert.ToInt32(q.productQua);
+            if (qua > 0 && qua >= vQu)
+            {
+                Booking booking = new Booking { productId = idProd, bookingQua = idProd};
+                db.Bookings.Add(booking);
+                db.SaveChanges();
+                int ostProd = Convert.ToInt32(qua) - vQu;
+                var data = db.Products.SingleOrDefault(row => row.productId == idProd);
+                data.productQua = ostProd;
+                db.SaveChanges();
+                return 1;
+            }
+            else
+                return 0;
+        }
+
+        /*public int Reserve(int idProd, int vQu)
+        {
             Thread t = Thread.CurrentThread;
             int qua = 0;
             var desc = db.Products.Where(p => p.productId == idProd).Select(p => new { p.productQua }).ToList();
@@ -36,7 +57,6 @@ namespace ShopsExpress.Controllers
             }
             else
                 return 0;
-            
-        }
+        }*/
     }
 }
