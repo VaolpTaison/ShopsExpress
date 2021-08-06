@@ -26,9 +26,9 @@ namespace ShopsExpress
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            /*string connection = Configuration.GetConnectionString("DefaultConnection");
+            string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationContext>(options =>
-                options.UseSqlServer(connection));*/
+                options.UseSqlServer(connection));
             services.AddControllersWithViews();
         }
 

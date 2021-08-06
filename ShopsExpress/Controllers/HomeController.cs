@@ -41,18 +41,25 @@ namespace ShopsExpress.Controllers
             return NotFound();
         }
 
-        public shopStorage ss;
+        //public shopStorage ss;
         // ф-ия обработчик HttpHost (заполнение таблицы Bookings)
         [HttpPost]
         public ActionResult Booking(int kolpr, int idProd, string nameUs, string emailUs)
         {
-            shopStorage ss;
+            var ss = new shopStorage(db);
             Booking booking = new Booking {bookingDesc = kolpr, productId = idProd, nameUser = nameUs, emailUser = emailUs };
-            ss.Reserve(idProd, kolpr);
+            int i = ss.Reserve(idProd, kolpr);
+            if (i == 1)
+            {
+                db.Bookings.Add(booking);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+                ViewBag.result = 0;
+                return RedirectToAction("Booking");
             //EditProduct(kolpr, idProd);
-            db.Bookings.Add(booking);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            
         }
 
         // процедура изменения данных об остатке товара в таблице Products
