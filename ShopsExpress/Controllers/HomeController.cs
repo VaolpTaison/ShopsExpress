@@ -47,8 +47,8 @@ namespace ShopsExpress.Controllers
         {
             var ss = new shopStorage(db);
             //Booking booking = new Booking { bookingDesc = kolpr, productId = idProd, nameUser = nameUs, emailUser = emailUs };
-            int i = ss.Reserve(idProd, kolpr); // idProd = id товара, kolpr - количество бронируемого товара
-            if (i == 1)
+            var i = ss.Reserve(idProd, kolpr); // idProd = id товара, kolpr - количество бронируемого товара
+            if (i.Result == 1)
             {
                 Booking booking = db.Bookings.First(p => p.emailUser == null); // проверка строки, у которой отсутствует запись email (Как правило она одна в бд)
                 booking.nameUser = nameUs;
@@ -57,8 +57,10 @@ namespace ShopsExpress.Controllers
                 return RedirectToAction("Index");
             }
             else
+            {
                 ViewBag.result = 0;
-            return RedirectToAction("Booking");
+                return RedirectToAction("Booking");
+            }
         }
     }
 }
